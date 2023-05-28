@@ -5,7 +5,7 @@ A very simple bot that returns a song.link URL for songs shared to a channel usi
 ## Getting Started
 
 ### Discord Prep:
- 1. Create Application via [Discord Develoepr Portal](https://discord.com/developers/) - give it a fun name
+ 1. Create Application via [Discord Developer Portal](https://discord.com/developers/) - give it a fun name
  2. Configure your bot via the 'Bot' tab - ensure you have enabled 'message content intent'
  3. Generate and take note of your bot token you will need this when creating your .env file below
  4. Copy your application ID from the general information tab
