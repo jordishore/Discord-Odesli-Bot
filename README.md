@@ -18,7 +18,7 @@ A very simple bot that returns a song.link URL for songs shared to a channel usi
 
 ## Usage
  1. Start the bot by running `bot.py` in your terminal
- 2. Invoke the bot using `/sl` followed by the url of the song you wish to share.Please see below for a full list of support streaming platforms
+ 2. Invoke the bot using `/sl` followed by the url of the song you wish to share. Please see below for a full list of support streaming platforms
  3. The bot will then reply with a song.link url for your song.
 ### Example:
 - User sends: /sl https://tidal.com/browse/track/87166293
