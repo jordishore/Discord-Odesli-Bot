@@ -1,5 +1,5 @@
 # Discord bot for Odesli (formerly Songlink)
-A very simple bot that returns a song.link URL for songs shared to a channel using most major streaming platform's sahre URL's.
+A very simple bot that returns a song.link URL for songs shared to a channel using most major streaming platform's share URL's.
 
 
 ## Getting Started
