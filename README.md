@@ -9,7 +9,7 @@ A very simple bot that returns a song.link URL for songs shared to a channel usi
  2. Configure your bot via the 'Bot' tab - ensure you have enabled 'message content intent'
  3. Generate and take note of your bot token you will need this when creating your .env file below
  4. Copy your application ID from the general information tab
- 5. Add bot to your server using the following link, inserting your application ID after `ID=`: `https://discord.com/api/oauth2/authorize?client_id=&permissions=137439217728&scope=bot`
+ 5. Add bot to your server using the following link, inserting your application ID after `id=`: `https://discord.com/api/oauth2/authorize?client_id=&permissions=137439217728&scope=bot`
 
 ### Python Prep:
  1. Download the source code zip from the releases tab
@@ -18,10 +18,10 @@ A very simple bot that returns a song.link URL for songs shared to a channel usi
 
 ## Usage
  1. Start the bot by running `bot.py` in your terminal
- 2. Invoke the bot using `/sl` followed by the url of the song you wish to share. Please see below for a full list of support streaming platforms
+ 2. Invoke the bot using `?sl` followed by the url of the song you wish to share - please see below for a full list of supported streaming platforms
  3. The bot will then reply with a song.link url for your song.
 ### Example:
-- User sends: /sl https://tidal.com/browse/track/87166293
+- User sends: ?sl https://tidal.com/browse/track/87166293
 - Bot Replies: https://song.link/t/87166293
 - Please see the 'Examples' folder for screenshots
 
