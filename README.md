@@ -9,7 +9,7 @@ A very simple bot that returns a song.link URL for songs shared to a channel usi
  2. Configure your bot via the 'Bot' tab - ensure you have enabled 'message content intent'
  3. Generate and take note of your bot token you will need this when creating your .env file below
  4. Copy your application ID from the general information tab
- 5. Add bot to your server using the following link, inserting your application ID after `ID=`: `https://discord.com/oauth2/authorize?client_id=&permissions=8&scope=bot%20applications.commands`
+ 5. Add bot to your server using the following link, inserting your application ID after `ID=`: `https://discord.com/api/oauth2/authorize?client_id=&permissions=137439217728&scope=bot`
 
 ### Python Prep:
  1. Download the source code zip from the releases tab
