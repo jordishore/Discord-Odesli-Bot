@@ -30,8 +30,10 @@ async def on_ready():
 
 @bot.command(name='sl')
 async def sl(ctx, songlink: str):
+    print(f'{ctx.author}: {ctx.message.content}')
     response = get_link(songlink)
-    await ctx.send(response)
+    await discord.Message.delete(ctx.message, delay=None)
+    await ctx.send(f"{ctx.author.mention} shared a song: {response}")
 
 
 bot.run(TOKEN)
