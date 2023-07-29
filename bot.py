@@ -47,8 +47,10 @@ async def sl(ctx, songlink: str):
     await ctx.send(f"{ctx.author.mention} shared a song: {response}")
     logger.info('Deleting original message...')
     await discord.Message.delete(ctx.message, delay=10)
-    time.sleep(10)
-    logger.info('Message deleted.')
+
+@bot.event
+async def on_message_delete(message):
+    logger.info(f'Message {message.id} has been deleted.')
     
 
 
