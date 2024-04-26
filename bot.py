@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 import time
+import re
 
 import discord
 import requests
@@ -30,6 +31,7 @@ def get_link(url):
     logger.info(f'Getting Songlink')
     request = requests.get(api_link)
     data = request.json()
+    #logger.info(data)
     songlink = str(data['pageUrl'])
     logger.info(f'Songlink: {songlink}')
     return songlink
@@ -44,11 +46,18 @@ async def on_ready():
 async def sl(ctx, songlink: str):
     logger.info(f'{ctx.author.display_name} shared: {ctx.message.content}')
     response = get_link(songlink)
-    await ctx.send(f"{ctx.author.mention} shared a song: {response}")
+    typere = re.search(r"\/\/([\w]*)\.", response)
+    type = typere.group(1)
+    if type == "album":
+        grammar = "an"
+    else: grammar = "a"
+    await ctx.send(f"{ctx.author.mention} shared {grammar} {type}: {response}")
     logger.info('Deleting original message...')
     await discord.Message.delete(ctx.message, delay=10)
-    time.sleep(10)
-    logger.info('Message deleted.')
+
+@bot.event
+async def on_message_delete(message):
+    logger.info(f'Message {message.id} has been deleted.')
     
 
 
