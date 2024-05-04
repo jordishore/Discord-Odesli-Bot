@@ -11,15 +11,14 @@ This is a simple app that takes a share URL from your streaming platform and ret
  1. Create Application via [Discord Developer Portal](https://discord.com/developers/) - give it a fun name
  2. Configure your bot via the 'Bot' tab - ensure you have enabled 'message content intent'
  3. Generate and take note of your bot token you will need this when creating your .env file below
- 4. Get your guild ID by right clicking on your server and selcting 'Copy Server ID'. Note this for the .env file
- 5. Copy your application ID from the general information tab
- 6. Add bot to your server using the following link, inserting your application ID after `id=`: `https://discord.com/api/oauth2/authorize?client_id=&permissions=137439217728&scope=bot`
+ 4. Copy your application ID from the general information tab
+ 5. Add bot to your server using the following link, inserting your application ID after `id=`: `https://discord.com/api/oauth2/authorize?client_id=&permissions=137439217728&scope=bot`
 
 ### Python Prep
 
  1. Download the source code zip from the releases tab
  2. Install from the requirements.txt [How-To](https://note.nkmk.me/en/python-pip-install-requirements/)
- 3. Create a .env file in the package directory and include the following lines: `DISCORD_TOKEN=<YOUR-BOT-TOKEN>`, `GUILD_ID=<YOUR-GUILD-ID>`.
+ 3. Create a .env file in the package directory and include the following lines: `DISCORD_TOKEN=<YOUR-BOT-TOKEN>`
 
 ## Usage
 
