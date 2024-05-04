@@ -1,13 +1,12 @@
-import logging
 import os
 import sys
-import time
 import re
-
-import discord
+import logging
 import requests
-from discord.ext import commands
+import discord
+from discord import app_commands
 from dotenv import load_dotenv
+import requests.utils
 
 logger = logging.getLogger('discord-odesli-bot')
 logger.setLevel(logging.INFO)
@@ -18,47 +17,63 @@ logger.handler.setFormatter(formatter)
 logger.addHandler(logger.handler)
 
 load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
+token = os.getenv('DISCORD_TOKEN')
+# do this better
+guild_id = os.getenv('GUILD_ID')
+
+class OdesliBot(discord.Client):
+    def __init__(self, *, intents: discord.Intents):
+        super().__init__(intents=intents)
+        self.tree = app_commands.CommandTree(self)
+        self.guild = discord.Object(guild_id)
+
+    async def setup_hook(self):
+        self.tree.copy_global_to(guild=self.guild)
+        await self.tree.sync(guild=self.guild)
+
+class SongLink():
+    def __init__(self):
+        self.api_base = 'https://api.song.link/v1-alpha.1/links?url='
+        self.country_code = 'AU'
+    async def get_link(self, url):
+        link = self.api_base + url + self.country_code
+        url_encoded = requests.utils.requote_uri(link)
+        logger.info(f'Getting Songlink')
+        request = requests.get(url_encoded, timeout=300)
+        data = request.json()
+        logger.info(data)
+        songlink = str(data['pageUrl'])
+        logger.info(f'Songlink: {songlink}')
+        return songlink
+
 
 intents = discord.Intents.default()
-intents.message_content = True
-
-bot = commands.Bot(command_prefix='?', intents=intents)
+client = OdesliBot(intents=intents)
 
 
-def get_link(url):
-    api_link = "https://api.song.link/v1-alpha.1/links?url=" + url + "&userCountry=AU" #update country code to suit
-    logger.info(f'Getting Songlink')
-    request = requests.get(api_link)
-    data = request.json()
-    #logger.info(data)
-    songlink = str(data['pageUrl'])
-    logger.info(f'Songlink: {songlink}')
-    return songlink
-
-
-@bot.event
+@client.event
 async def on_ready():
-    logger.info(f'{bot.user.name} has connected to Discord!')
+    print(f'Logged in as {client.user} (ID: {client.user.id})')
+    print('------')
 
-
-@bot.command(name='sl')
-async def sl(ctx, songlink: str):
-    logger.info(f'{ctx.author.display_name} shared: {ctx.message.content}')
-    response = get_link(songlink)
+@client.tree.command(name='songlink', description='Shares a universal link to the channel')
+@app_commands.rename(user_link='url')
+@app_commands.describe(user_link='Enter the sahre URL from your streaming platform. This will be converted to a universal link.')
+async def get_link_slash_command(interaction: discord.Interaction, user_link: str):
+    response = await SongLink().get_link(url=user_link)
     typere = re.search(r"\/\/([\w]*)\.", response)
     type = typere.group(1)
     if type == "album":
         grammar = "an"
     else: grammar = "a"
-    await ctx.send(f"{ctx.author.mention} shared {grammar} {type}: {response}")
-    logger.info('Deleting original message...')
-    await discord.Message.delete(ctx.message, delay=10)
-
-@bot.event
-async def on_message_delete(message):
-    logger.info(f'Message {message.id} has been deleted.')
-    
+    await interaction.response.send_message(f'{interaction.user.mention} shared {grammar} {type}.\n{response}')
 
 
-bot.run(TOKEN)
+@client.tree.context_menu(name='Get Universal Link')
+async def get_link_from_message(interaction: discord.Interaction, message: discord.Message):
+    print(message.content)
+    response = await SongLink().get_link(url=message.content)
+    await interaction.response.send_message(f'{response} {interaction.user.mention}', ephemeral=True)
+
+
+client.run(token)
