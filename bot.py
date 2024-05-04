@@ -25,9 +25,7 @@ class OdesliBot(discord.Client):
         self.tree = app_commands.CommandTree(self)
 
     async def setup_hook(self):
-        for guild in self.guilds:
-            self.tree.copy_global_to(guild=guild)
-            await self.tree.sync(guild=guild)
+        await self.tree.sync()
 
 class SongLink():
     def __init__(self):
