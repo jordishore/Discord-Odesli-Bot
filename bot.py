@@ -18,18 +18,16 @@ logger.addHandler(logger.handler)
 
 load_dotenv()
 token = os.getenv('DISCORD_TOKEN')
-# do this better
-guild_id = os.getenv('GUILD_ID')
 
 class OdesliBot(discord.Client):
     def __init__(self, *, intents: discord.Intents):
         super().__init__(intents=intents)
         self.tree = app_commands.CommandTree(self)
-        self.guild = discord.Object(guild_id)
 
     async def setup_hook(self):
-        self.tree.copy_global_to(guild=self.guild)
-        await self.tree.sync(guild=self.guild)
+        for guild in self.guilds:
+            self.tree.copy_global_to(guild=guild)
+            await self.tree.sync(guild=guild)
 
 class SongLink():
     def __init__(self):

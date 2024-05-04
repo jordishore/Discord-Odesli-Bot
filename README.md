@@ -57,4 +57,4 @@ This is a simple app that takes a share URL from your streaming platform and ret
 
 ## Disclaimer
 
-This bot was built as a personal project and is in no way affiliated with Odesli/SongLink. For Odesli's terms of service and API information please refer to https://odesli.co/
+This bot was built as a personal project and is in no way affiliated with Odesli/SongLink. For Odesli's terms of service and API information please refer to <https://odesli.co/>
