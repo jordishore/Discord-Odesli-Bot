@@ -1,4 +1,4 @@
-# Discord app for Odesli (formerly Songlink)
+# Discord bot for Odesli (formerly Songlink)
 
 Everyone can now enjoy the music you share no matter what platform they use.
 
