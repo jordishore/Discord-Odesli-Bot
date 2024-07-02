@@ -1,8 +1,8 @@
-# Discord app for Odesli (formerly Songlink)
+# Discord bot for Odesli (formerly Songlink)
 
 Everyone can now enjoy the music you share no matter what platform they use.
 
-This is a simple app that takes a share URL from your streaming platform and returns a universal link so that everyone can easily enjoy the music you share.
+This is a simple bot that takes a share URL from your streaming platform and returns a universal link so that everyone can easily enjoy the music you share.
 
 ## Getting Started
 
