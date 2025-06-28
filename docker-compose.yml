@@ -1,0 +1,6 @@
+services:
+  discordodeslibot:
+    image: discordodeslibot
+    build:
+      context: .
+      dockerfile: ./Dockerfile
