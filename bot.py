@@ -69,10 +69,14 @@ async def get_link_slash_command(interaction: discord.Interaction, user_link: st
 
 @client.tree.context_menu(name='Get Universal Link')
 async def get_link_from_message(interaction: discord.Interaction, message: discord.Message):
-    url_from_messaeg = re.search("(?P<url>https?://[^\s]+)", message.content).group("url")
-    logger.info(url_from_messaeg)
-    response = await SongLink().get_link(url=url_from_messaeg)
-    await interaction.response.send_message(f'{response} {interaction.user.mention}', ephemeral=True)
+    # FIXES - https://github.com/jordishore/Discord-Odesli-Bot/issues/8
+    # defer the response to avoid timeout, puts bot into thinking state
+    await interaction.response.defer(ephemeral=True)
+    url_from_message = re.search("(?P<url>https?://[^\\s]+)", message.content).group("url")
+    logger.info(f'input URL: {url_from_message}')
+    response = await SongLink().get_link(url=url_from_message)
+    # send the response
+    await interaction.followup.send(f'{response} {interaction.user.mention}', ephemeral=True)
 
 
 client.run(token)
