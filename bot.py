@@ -94,4 +94,5 @@ async def get_link_from_message(interaction: discord.Interaction, message: disco
     # send the response
     await interaction.followup.send(f'{response} {interaction.user.mention}', ephemeral=True)
 
+
 client.run(token)
