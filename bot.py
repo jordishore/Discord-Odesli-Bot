@@ -83,7 +83,7 @@ async def get_link_slash_command(interaction: discord.Interaction, user_link: st
 
 
 # context menu command
-@client.tree.context_menu(name='TESTING - Get Universal Link')
+@client.tree.context_menu(name='Get Universal Link')
 async def get_link_from_message(interaction: discord.Interaction, message: discord.Message):
     # FIXES - https://github.com/jordishore/Discord-Odesli-Bot/issues/8
     # defer the response to avoid timeout, puts bot into thinking state
