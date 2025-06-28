@@ -153,4 +153,4 @@ cython_debug/
 .DS_Store
 TO-DO
 docker-compose.debug.yml
-.vscode/
+.vscode
